@@ -10,28 +10,43 @@ userRouter.get('/', (req, res, next) => {
   res.render('Users/scout');
 });
 
-userRouter.get('/user-list', checkRoles('User'), (req, res, next) => {
-  User.find().then(users => {
-  res.render('Users/user-list', {user: req.user, users});
+userRouter.get('/user-list', (req, res, next) => {
+  let userSpecialty = req.query.specialty;
+  let msgAll = "All";
+  if(userSpecialty){msgAll = userSpecialty}
+  console.log(userSpecialty);
+  if(!userSpecialty){
+    User.find().then(users => {
+      res.render('Users/user-list' , {user: req.user, users, msgAll} );
+      })
+      .catch((error) => {
+      console.log(error)
+      next();
+      })
+  } else {
+  User.find({'specialty': userSpecialty}).then(users => {
+  res.render('Users/user-list' , {user: req.user, users, msgAll} );
   })
   .catch((error) => {
   console.log(error)
   next();
   })
+}
 });
 
 userRouter.get('/:id', checkRoles('User'), (req, res, next) => {
 
 let userId = req.params.id;
 if (!userId) { 
-  return res.status(404).render('not-found');
+  return res.status(404).render('not-found'); 
 }
 User.findById(userId)
   .then(theUser => {
     if (!theUser) {
         return res.status(404).render('not-found');
     }
-    res.render("User/profile", theUser)
+    console.log('here')
+    res.render("Users/profile", theUser)
   })
   .catch(next)
 });

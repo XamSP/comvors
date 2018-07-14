@@ -18,6 +18,9 @@ const userSchema = new Schema({
     type: Number,
     default: 10,
   },
+  friends:[String],
+  inbox:[String],
+  friendReq:[String]
 }, {
   timestamps: { createdAt: "created_at", updatedAt: "updated_at" }
 });

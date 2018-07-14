@@ -1,6 +1,7 @@
-<form action="/" method="POST" id="form-container">
+<form action="/scout/user-list" method="get" id="form-container">
   <label>Specialty: </label>
-    <select name="specialty" value="{{user.specialty}}">
+    <select name="specialty" value="{{specialty}}">
+        <option value="">All</option>
         <option value="Null">Null</option>
         <option value="Composer">Composer</option>
         <option value="Designer">Designer</option>
@@ -10,4 +11,5 @@
   {{#if message}}
     <div class="error-message">{{ message }}</div>
   {{/if}}
+  <button>Scout!</button>
 </form>
