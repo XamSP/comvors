@@ -1,0 +1,33 @@
+<h2>Signup</h2>
+
+<form action="/signup" method="POST" id="form-container">
+  <label for="username">Username</label>
+  <input id="username" type="text" name="username" placeholder="Teddy">
+  <br><br>
+  <label for="password">Password</label>
+  <input id="password" type="password" name="password" placeholder="Your password">
+  <label>Specialty: </label>
+    <select name="specialty" value="{{user.specialty}}">
+        <option value="Null">Null</option>
+        <option value="Composer">Composer</option>
+        <option value="Designer">Designer</option>
+        <option value="Donator">Donator</option>
+        <option value="Investor">Investor</option>
+        <option value="Marketing">Marketing</option>
+        <option value="Modeler">Modeler</option>
+        <option value="Programmer">Programmer</option>
+        <option value="Spriter">Spriter</option>
+        <option value="Voice-Actor">Voice-Actor</option>
+    </select>
+  {{#if message}}
+    <div class="error-message">{{ message }}</div>
+  {{/if}}
+  <br><br>
+
+  <button>Create account</button>
+
+  <p class="account-message">
+    Do you already have an account?
+    <a href="/login">Login</a>
+  </p>
+</form>

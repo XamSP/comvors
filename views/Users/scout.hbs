@@ -1,0 +1,13 @@
+<form action="/" method="POST" id="form-container">
+  <label>Specialty: </label>
+    <select name="specialty" value="{{user.specialty}}">
+        <option value="Null">Null</option>
+        <option value="Composer">Composer</option>
+        <option value="Designer">Designer</option>
+        <option value="Programmer">Programmer</option>
+        <option value="Voice-Actor">Voice-Actor</option>
+    </select>
+  {{#if message}}
+    <div class="error-message">{{ message }}</div>
+  {{/if}}
+</form>

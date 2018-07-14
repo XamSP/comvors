@@ -1,0 +1,17 @@
+<h2>Users:</h2>
+
+<div class="">
+  {{#each users}}
+      <a role="button" href="/scout/{{this.id}}" class="a1 btn btn-primary btn-lg">{{this.username}}</a> <br>
+      <span> Coins:{{this.coins}} Specialty:{{this.specialty}}</span> <br>
+      <form action="/{{this.id}}/delete" method="post"> <button type="submit">DELETE</button></form><br>
+  {{/each}}
+</div>
+
+<p>Coins: {{user.coins}}</p>
+
+<a href="scout/{{user.id}}/edit" class="edit-button">Edit Your Profile!</a> 
+
+<a role="button" href="/scout/" class="a1 btn btn-primary btn-lg">Scout</a>
+
+<a href="/logout">Logout</a>

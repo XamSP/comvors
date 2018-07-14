@@ -1,0 +1,7 @@
+<h2>Users:</h2>
+  
+  {{#each users}}
+<div>{{user.req.user}}
+  <a href="user-list/{{this.id}}">{{this.username}}</a>   
+</div>
+  {{/each}}
