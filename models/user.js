@@ -19,7 +19,12 @@ const userSchema = new Schema({
     default: 10,
   },
   friends:[String],
-  inbox:[String],
+  inbox:[
+  { 
+    type: Schema.Types.ObjectId, 
+    ref: "Message",
+  }
+],
   friendReq:[String]
 }, {
   timestamps: { createdAt: "created_at", updatedAt: "updated_at" }

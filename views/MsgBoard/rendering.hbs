@@ -1,0 +1,27 @@
+
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<!-- Add specific javascript file -->
+<script> </script>
+<div>
+  <p>{{theMsg.subject}}</p>
+  <p>
+    <ul> Users:
+    {{#each theMsg.users}}
+    <li>{{this.username}}</li>  
+    {{/each}} 
+    </ul>
+    <ul>
+      {{#each theMsg.texts}}
+      <li>{{this.user.username}} {{this.msg}}</li>
+      {{/each}}
+    </ul>
+  </p>
+  <form id="{{theMsg._id}}msg-form" style="display:none" onsubmit="sendMsg('{{theMsg._id}}')">
+    <input id="{{theMsg._id}}-addText" type="text" name="childMsgContent" placeholder="Whatcha got to say?">
+    <input type="submit" value="Add!">
+</form>
+</div>
+
+<!-- remember that onclick is an event function that must be found in javascript-->
+
+
