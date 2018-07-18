@@ -22,12 +22,13 @@ msgRouter.get('/:msgid', checkRoles('User'), (req, res, next) => {
   if (!msgId) { 
     return res.status(404).render('not-found'); 
   }
-  Message.findById(msgId)
+  Message.findById(msgId).populate('users').populate('texts.user')
     .then(theMsg => {
       if (!theMsg) {
           return res.status(404).render('not-found');
       }
       console.log(theMsg)
+      //const user = theMsg.populate('users')
       res.render("MsgBoard/rendering", {theMsg})
     })
     .catch(next)
@@ -36,20 +37,19 @@ msgRouter.get('/:msgid', checkRoles('User'), (req, res, next) => {
 msgRouter.post('/:msgid', (req, res, next) => {
   //get the id of parent msg and input child id of msg
   const {childMsgContent} = req.body;
-  Message.findOne({'_id': req.params.msgid})
+  Message.findById(req.params.msgid).populate('texts')
   .then(sendMsg => {
-    // variable of ParentMsg to add the child msg
-    const parentMsg = sendMsg.id(req.params.msgid);
-    // variable of ChildMsg
+
     const childMsg = {
-      content: childMsgContent,
-      creatorId: req.session.passport.user
+      msg: childMsgContent,
+      user: req.session.passport.user
     };
     // Pushes childMsg(obj) to var parentMsg
-    parentMsg.texts.push(childMsg);
-    // save it to the db
+    sendMsg.texts.push(childMsg);
+
     sendMsg.save()
       .then(event => {
+        console.log('the save is' + event)
         res.send(event);
       }) 
       .catch(err => {

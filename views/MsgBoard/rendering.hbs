@@ -16,7 +16,7 @@
       {{/each}}
     </ul>
   </p>
-  <form id="{{theMsg._id}}msg-form" style="display:none" onsubmit="sendMsg('{{theMsg._id}}')">
+  <form onsubmit="sendMsg('{{theMsg._id}}')">
     <input id="{{theMsg._id}}-addText" type="text" name="childMsgContent" placeholder="Whatcha got to say?">
     <input type="submit" value="Add!">
 </form>

@@ -10,7 +10,7 @@ const msgApi = axios.create({
 
 function sendMsg(id){
   msgApi.post(id, {
-    childMsgContent: document.getElementById(`${id}-addComment`).value
+    childMsgContent: document.getElementById(`${id}-addText`).value
   })
   .then(response => {
       // console.log(response)
