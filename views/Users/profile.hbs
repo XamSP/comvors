@@ -6,6 +6,11 @@
   <p>Coins: {{this.coins}}</p>
 </div>
 
+<form action="/scout/{{this.id}}" method="post">
+  <input type="text" name="friendReq" value="{{this.id}}">
+  <button type="submit">Send Request!</button>
+</form>
+
 <form>
   <input type="button" value="Go back!" onclick="history.back()">
 </form>

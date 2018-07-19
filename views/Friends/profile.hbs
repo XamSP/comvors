@@ -1,0 +1,16 @@
+<h2>Extra info</h2>
+<div>
+  <p>Username: {{user.username}}</p>
+  <p>Specialty: {{user.specialty}}</p>
+  <p>Role: {{user.role}}</p>
+  <p>Coins: {{user.coins}}</p>
+  <ul> Friends:
+    {{#each user.friends}}
+    <li>{{this.username}}</li>
+    {{/each}}
+  </ul>
+</div>
+
+<form>
+  <input type="button" value="Go back!" onclick="history.back()">
+</form>

@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
 const Schema   = mongoose.Schema;
+mongoose.plugin(schema => { schema.options.usePushEach = true });
+
 
 const userSchema = new Schema({
   username: String,
@@ -18,14 +20,24 @@ const userSchema = new Schema({
     type: Number,
     default: 10,
   },
-  friends:[String],
+  friends:[
+    { 
+      type: Schema.Types.ObjectId, 
+      ref: "User",
+    }
+  ],
   inbox:[
   { 
     type: Schema.Types.ObjectId, 
     ref: "Message",
   }
 ],
-  friendReq:[String]
+  friendReq:[
+    { 
+      type: Schema.Types.ObjectId, 
+      ref: "User",
+    }
+  ]
 }, {
   timestamps: { createdAt: "created_at", updatedAt: "updated_at" }
 });

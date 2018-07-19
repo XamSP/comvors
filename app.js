@@ -100,6 +100,9 @@ app.use('/scout', scout);
 const messenger = require('./routes/messenger');
 app.use('/messenger', messenger);
 
+const friends = require('./routes/friends');
+app.use('/friends', friends);
+
 // const admin = require('./routes/admin');
 // app.use('/admin', admin);
 

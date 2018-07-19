@@ -4,6 +4,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 }, false);
 
+//SEE if you can start ajax before the page renders to ensure no hiccups
+
 const msgApi = axios.create({
   baseURL: 'http://localhost:3000/messenger'
 });

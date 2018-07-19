@@ -51,6 +51,23 @@ User.findById(userId)
   .catch(next)
 });
 
+userRouter.post('/:id', checkRoles('User'), (req, res, next) =>{
+  User.findById(req.params.id).populate('friendReq')
+  .then(user => {
+    user.friendReq.push(req.user._id);
+
+    user.save()
+      .then(event => {
+        console.log('the save is' + event)
+        res.redirect('/friends')
+      }) 
+      .catch(err => {
+        console.log('no work saving the childMsg:', err);
+        next();
+      })
+  })
+});
+
 userRouter.get('/:id/edit', checkRoles('User'),(req, res, next) => {
   let userId = req.params.id;
   User.findById(userId)
