@@ -15,7 +15,7 @@ const LocalStrategy= require("passport-local").Strategy;
 const User         = require("./models/user");
 const flash        = require("connect-flash");
 //const Handlebars = require('handlebars/runtime');
-
+mongoose.connect(process.env.MONGODB_URI);
 mongoose.Promise = Promise;
 mongoose
   .connect('mongodb://localhost/comvors', {useMongoClient: true})
