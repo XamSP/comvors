@@ -52,7 +52,7 @@ app.use((req, res, next) => {
   // Adds user domain to be accessed from hbs to be used with axios on heroku 
   req.userDomain = process.env.DOMAIN;
   if(req.user){
-  User.findById(req.user._id).populate('events', 'name').populate('groups', 'name')
+  User.findById(req.user._id)
     .then(user => {
       req.user = user;
     });
