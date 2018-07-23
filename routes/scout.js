@@ -36,19 +36,20 @@ userRouter.get('/user-list', (req, res, next) => {
 
 userRouter.get('/:id', checkRoles('User'), (req, res, next) => {
 
-let userId = req.params.id;
-if (!userId) { 
-  return res.status(404).render('not-found'); 
-}
-User.findById(userId)
-  .then(theUser => {
-    if (!theUser) {
-        return res.status(404).render('not-found');
-    }
-    console.log('here')
-    res.render("Users/profile", theUser)
-  })
-  .catch(next)
+  let userId = req.params.id;
+  if (!userId) { 
+    return res.status(404).render('not-found'); 
+  }
+  
+  User.findById(userId)
+    .then(theUser => {
+      if (!theUser) {
+          return res.status(404).render('not-found');
+      }
+      console.log('here')
+      res.render("Users/profile", theUser)
+    })
+    .catch(next)
 });
 
 userRouter.post('/:id', checkRoles('User'), (req, res, next) =>{

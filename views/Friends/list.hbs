@@ -4,6 +4,14 @@
   {{#each myFriends}}
       <a role="button" href="/friends/{{this.id}}" class="a1 btn btn-primary btn-lg">{{this.username}}</a> <br>
       <span> Coins:{{this.coins}} Specialty:{{this.specialty}}</span> <br>
-      <form action="/{{this.id}}/delete" method="post"> <button type="submit">DELETE FRIEND</button></form><br>
+      <button onclick="deleteUser('{{this.id}}', '{{../user._id}}')">Delete</button><br>
   {{/each}}
+  {{#if pendingReq}}
+    {{#each pendingReq}}
+      <li>{{this.username}} 
+        <button onclick="laAccept('{{this.id}}', '{{../user._id}}')">Accept Request</button>
+        <button onclick="laReject('{{this.id}}', '{{../user._id}}')">Decline Request</button>
+      </li>
+    {{/each}}
+  {{/if }}
 </div>
