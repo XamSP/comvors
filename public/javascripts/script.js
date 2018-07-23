@@ -7,11 +7,11 @@ document.addEventListener('DOMContentLoaded', () => {
 //SEE if you can start ajax before the page renders to ensure no hiccups
 
 const friendApi = axios.create({
-  baseURL: 'http://localhost:3000/friends'  
+  baseURL: process.env.DOMAIN  + 'friends'
 });
 
 const msgApi = axios.create({
-  baseURL: 'http://localhost:3000/messenger'
+  baseURL: process.env.DOMAIN  + 'messenger'
 });
 
 function deleteUser(id, myId){

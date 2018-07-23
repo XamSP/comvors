@@ -18,7 +18,22 @@ frndRouter.put('/:id/delete', (req, res, next) => {
     user.save()
       .then(event => {
         //console.log('the save is' + event)
-        res.send(event);
+        User.findById(userReqId).populate('friends')
+        .then(user2 => {
+          const getMapped2 = user2.friends.map(i => i._id == userId)
+          const getIndex2 = getMapped2.indexOf(true);
+          user2.friends.splice(getIndex2,1)
+          user2.save()
+          .then(event => {
+            res.send(event);
+          })
+          .catch(err => {
+            next();
+          })
+        })
+        .catch(err => {
+          next();
+        })
       }) 
       .catch(err => {
         console.log('no work saving the childMsg:', err);
