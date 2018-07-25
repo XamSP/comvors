@@ -7,6 +7,8 @@ document.addEventListener('DOMContentLoaded', () => {
 //SEE if you can start ajax before the page renders to ensure no hiccups
 const domainUrl = document.getElementById('domainName').innerText;
 
+//add this to create conversasion childMsgContent: document.getElementById(`${id}-addText`).value
+
 const friendApi = axios.create({
   baseURL: domainUrl  + 'friends'
 });
@@ -30,8 +32,8 @@ function deleteUser(id, myId){
 
 function laAccept(id, myId){
   const rmId = {friendReq: {_id: id} };
-  console.log(`${rmId.friendReq._id} and ${id} anddd ${myId} `)
-
+  //console.log(`${rmId.friendReq._id} and ${id} anddd ${myId} `)
+  console.log(friendApi)
   friendApi.post(`/${id}/accepted`, rmId)
 
   //console.log(`This reject: ${id}`)
@@ -57,7 +59,7 @@ function laReject(id, myId){
 
 function sendMsg(id){
   msgApi.post(id, {
-    childMsgContent: document.getElementById(`${id}-addText`).value
+    childMsgContent: document.getElementById(`LeText`).value
   })
   .then(response => {
       // console.log(response)

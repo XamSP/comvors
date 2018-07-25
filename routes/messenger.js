@@ -11,9 +11,80 @@ msgRouter.get('/', checkRoles('User'),(req, res, next) => {
   User.findById(req.user._id).populate('inbox')
   .then(user=> {
     let msgs = user.inbox 
-    console.log(msgs[0].subject);
+    //console.log(msgs[0].subject);
     res.render('MsgBoard/index', {msgs});
   });  
+});
+
+msgRouter.get('/create', checkRoles('User'), (req, res,next) => {
+  User.findById(req.user._id).populate('friends')
+  .then(user => {
+    res.render('MsgBoard/startmsg', {user})
+  })
+  .catch(err => {
+    next();
+  })
+});
+
+msgRouter.post('/create', checkRoles('User'), (req, res,next) => {
+  const username = req.body.username;
+  const subject = req.body.subject;
+  //get the users after getting the getUser _id
+  const {childMsgContent} = req.body;
+  //console.log(`username: ${username} subject: ${subject} Content: ${childMsgContent} OGUser: ${req.user.username}`)
+  
+  if (username === "" || subject === "" || childMsgContent === "") {
+    res.render("messenger/create", { message: "Missing Field(s)!" });
+    return;
+  }
+
+  User.findOne({ username })
+  .then(user => {
+    if (!user) {
+      res.render("messenger/create", { message: "The username doesn't exists!" });
+      return;
+    }
+    
+    //console.log(`the user = ${user}`)
+    const childMsg = {
+      msg: childMsgContent,
+      user: req.user._id
+    };
+
+    const newMsg = new Message({
+      subject,
+      users: [user._id, req.user._id],
+      texts: [childMsg] 
+    });
+
+  //console.log(`childMsg = ${childMsg} and newMsg = ${newMsg} and userId = ${req.user._id}`)
+
+    newMsg.save((err) => {
+      if (err) {
+        res.render("messenger/create", { message: "Something went wrong" });
+      } else {
+        user.inbox.push(newMsg._id)
+        user.save(err => {
+          if (err) {
+            res.render("messenger/create", { message: "Something went wrong" });
+          } else {
+            req.user.inbox.push(newMsg._id)
+            req.user.save(err => {
+              if (err) {
+                res.render("messenger/create", { message: "Something went wrong" });
+              } else {
+                res.redirect("/messenger");
+              }
+            })
+            //res.redirect("/messenger");
+          }
+        })
+      }
+    });
+  })
+  .catch(error => {
+    next(error)
+  })
 });
 
 msgRouter.get('/:msgid', checkRoles('User'), (req, res, next) => {

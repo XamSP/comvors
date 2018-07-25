@@ -1,7 +1,11 @@
 <h2>Users:</h2>
 
 <div class="">
-  {{#each msgs}}
+  {{#if msgs}}
+    {{#each msgs}}
       <a role="button" href="/messenger/{{this.id}}" class="a1 btn btn-primary btn-lg">{{this.subject}}</a> <br>
-  {{/each}}
+    {{/each}}
+  {{/if}}
+
+  <a role="button" href="/messenger/create" class="a1 btn btn-primary btn-lg">Create Message</a>
 </div>

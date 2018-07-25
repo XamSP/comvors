@@ -4,7 +4,6 @@
   {{#each users}}
       <a role="button" href="/scout/{{this.id}}" class="a1 btn btn-primary btn-lg">{{this.username}}</a> <br>
       <span> Coins:{{this.coins}} Specialty:{{this.specialty}}</span> <br>
-      <form action="/{{this.id}}/delete" method="post"> <button type="submit">DELETE</button></form><br>
   {{/each}}
 </div>
 

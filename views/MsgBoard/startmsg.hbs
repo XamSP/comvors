@@ -1,0 +1,19 @@
+<div>
+
+  <form></form>
+
+  <form action="/messenger/create" method="POST" id="form-container">
+    <label for="subject">Subject:</label>
+    <input id="subject" type="text" name="subject" placeholder="Hello!">
+    <br><br>
+    <label for="username">Who?</label>
+    <input id="username" type="text" name="username" placeholder="user53">
+    <form onsubmit="startMsg('{{theMsg._id}}')">
+      <input type="text" name="childMsgContent" placeholder="Write here!">
+      <input type="submit" value="Add!">
+    </form>
+  {{#if message}}
+    <div class="error-message">{{ message }}</div>
+  {{/if}}
+  </form>
+</div>
