@@ -19,6 +19,9 @@ html {
 .navbar-light .navbar-nav .nav-link {
   color: blue; }
 
+.seperate {
+  margin-top: 100px; }
+
 .blight {
   background-color: rgba(255, 255, 255, 0.6); }
 
