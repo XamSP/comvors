@@ -1,13 +1,58 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="/board">
+    <img src="{{user.imgPath}}" width="30" height="30" class="d-inline-block align-top" alt="">
+    Comvors
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link" href="/scout/">Scout<span class="sr-only">(current)</span></a>
+      <a class="nav-item nav-link" href="/messenger/">Messages</a>
+      <a class="nav-item nav-link" href="/friends/">Friend-List</a>
+      <a class="nav-item nav-link" href="/myself/{{user.id}}/edit">Edit Your Profile!</a>
+      <a class="nav-item nav-link" href="/logout">Logout</a>
+    </div>
+  </div>    
+</nav>
+<form>
+  <input type="button" value="Go back!" onclick="history.back()">
+</form>
 <div>
 
-  <form></form>
-
   <form action="/messenger/create" method="POST" id="form-container">
+  <div class="form-row">
+    <div class="col-7">
+      <label for="subject">Subject:</label>
+      <input id="subject" class="form-control" type="text" name="subject" placeholder="Hello!">
+    </div>
+    <div class="col">
+      <label for="username">Who?</label>
+      <input id="username" type="text" class="form-control" name="username" placeholder="user53">
+    </div>
+  </div>
+
+  <div class="form-row"s>
+    <div class="col form-group">
+      <label for="exampleFormControlTextarea1">Message</label>
+      <textarea class="form-control" id="exampleFormControlTextarea1" name="childMsgContent" rows="3"></textarea>
+    </div>
+  </div>
+    <form onsubmit="startMsg('{{theMsg._id}}')">
+      <input type="submit" value="Add!">
+    </form>
+  {{#if message}}
+    <div class="error-message">{{ message }}</div>
+  {{/if}}
+
+  </form>
+
+  {{!-- <form action="/messenger/create" method="POST" id="form-container">
     <label for="subject">Subject:</label>
-    <input id="subject" type="text" name="subject" placeholder="Hello!">
+    <input id="subject" class="form-control" type="text" name="subject" placeholder="Hello!">
     <br><br>
-    <label for="username">Who?</label>
-    <input id="username" type="text" name="username" placeholder="user53">
+    <input id="username" type="text" class="form-control" name="username" placeholder="user53">
     <form onsubmit="startMsg('{{theMsg._id}}')">
       <input type="text" name="childMsgContent" placeholder="Write here!">
       <input type="submit" value="Add!">
@@ -15,5 +60,5 @@
   {{#if message}}
     <div class="error-message">{{ message }}</div>
   {{/if}}
-  </form>
-</div>
+  </form> --}}
+

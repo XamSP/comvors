@@ -1,7 +1,27 @@
-<h2>Users:</h2>
-<p>Specialty: {{msgAll}}</p>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="/board">
+    <img src="{{user.imgPath}}" width="30" height="30" class="d-inline-block align-top" alt="">
+    Comvors
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link" href="/scout/">Scout<span class="sr-only">(current)</span></a>
+      <a class="nav-item nav-link" href="/messenger/">Messages</a>
+      <a class="nav-item nav-link" href="/friends/">Friend-List</a>
+      <a class="nav-item nav-link" href="/myself/{{user.id}}/edit">Edit Your Profile!</a>
+      <a class="nav-item nav-link" href="/logout">Logout</a>
+    </div>
+  </div>    
+</nav>
 
-  {{#each users}}
+<div class="container-fluid">
+  <h2 class="text-center">Users</h2>
+</div>
+
+  {{!-- {{#each users}}
 <div>{{user.req.user}}
   <p>
     <a href="user-list/{{this.id}}">{{this.username}}</a>  Coins: {{this.coins}}<br>
@@ -10,4 +30,56 @@
    
 
 </div>
-  {{/each}}
+  {{/each}} --}}
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-3">
+    
+      <div class="row top-buffer">
+        Specialty:{{msgAll}}
+      </div>
+
+      <div class="row top-buffer">
+        Total: {{users.length}}
+     </div>    
+    
+  </div>
+  <div class="col-lg-9">
+    {{#each users}}
+    <div class="container house card">
+      <div class="row">
+        <div class="col-lg-2">
+          {{#if this.imgPath}}
+          <img src="{{this.imgPath}}" width="90" height="90">
+          {{else}}
+          <img src="/images/JustC.png" width="90" height="90">
+          {{/if}}
+        </div>
+      
+        <div class="col-lg-10"> 
+        <div class="container">       
+        <div class="row">
+          <div class="col-lg-6">Name: {{this.username}}</div>
+          <div class="col-lg-6">Specialty: {{this.specialty}}</div>
+        </div>
+        <div class="row top-buffer">
+          <div class="col-lg-6">Coins: {{this.coins}}</div>
+          <div class="col-lg-6">Role: {{this.role}}</div>
+        </div>
+        <div class="row top-buffer">
+          <div class="col-lg-9 text-center ">Scout <a href="user-list/{{this.id}}"> {{this.username}}</a></div>
+          
+        </div>
+         
+        </div>
+        </div>
+                       
+      </div>
+    </div>
+    {{else}}
+    <p>No results!</p>
+    {{/each}}
+  </div>
+</div>
+</div>

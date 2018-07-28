@@ -1,22 +1,80 @@
+<body class="">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="/board">
+    <img src="{{user.imgPath}}" width="70" height="30" class="d-inline-block align-top" alt="">
+    Comvors
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link" href="/scout/">Scout<span class="sr-only">(current)</span></a>
+      <a class="nav-item nav-link" href="/messenger/">Messages</a>
+      <a class="nav-item nav-link" href="/friends/">Friend-List</a>
+      <a class="nav-item nav-link" href="/myself/{{user.id}}/edit">Edit Your Profile!</a>
+      <a class="nav-item nav-link" href="/myself/createXp">Add Experince</a>
+      <a class="nav-item nav-link" href="/logout">Logout</a>    
+    </div>
+  </div>    
+</nav>
+{{!-- 
 <h2>Users:</h2>
 
-<div class="">
+<div class="container-fluid">
+
+  <div class="row">
   {{#each users}}
-      <a role="button" href="/scout/{{this.id}}" class="a1 btn btn-primary btn-lg">{{this.username}}</a> <br>
+    <div class="col-lg-6  ">
+      <a href="/scout/{{this.id}}" class="">{{this.username}}</a> <br>
       <span> Coins:{{this.coins}} Specialty:{{this.specialty}}</span> <br>
+    </div>
+  {{/each}}
+  </div> --}}
+
+  {{#each user.experiences}}
+  <div class="row">
+    <div class="col-lg-12 text-center"><h3>{{this.title}}</h3></div>
+  </div>
+  
+  <div class="row">
+    <div class="col-lg-12 text-center">
+      <img src="{{this.imgPath}}" width="700" height="600" class="d-inline-block align-top" alt="">
+    </div>
+  </div>  
+  
+  <div class="row">
+    {{#each this.links}}
+    <div class="col-lg-12 text-center">
+      <a class="" href="{{this}}">{{this}}</a>
+    </div>
+  </div>   
+    {{/each}} 
+
+  
+  <div class="row">
+    <div class="col-lg-12 text-center">
+      <p>{{this.description}}</p>
+    </div>
+  </div>
   {{/each}}
 </div>
 
-<p>Coins: {{user.coins}}</p>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xl-2">
+      <p>Coins: {{user.coins}}</p>
+    </div>
+  </div>
+</div>
+</body>
 
-<p> This is an example of a tooltip on the right top corner <span class="tooltip up-left">↖</span> </p>
+{{!-- <a href="scout/{{user.id}}/edit" class="">Edit</a> 
 
-<a href="scout/{{user.id}}/edit" class="edit-button">Edit Your Profile!</a> 
+<a role="button" href="/scout/" class="">Scout</a>
 
-<a role="button" href="/scout/" class="a1 btn btn-primary btn-lg">Scout</a>
+<a role="button" href="/messenger/" class="">Messages</a>
 
-<a role="button" href="/messenger/" class="a1 btn btn-primary btn-lg">Messages</a>
+<a role="button" href="/friends/" class="">Friend-List</a>
 
-<a role="button" href="/friends/" class="a1 btn btn-primary btn-lg">Friend-List</a>
-
-<a href="/logout">Logout</a>
+<a href="/logout">Logout</a> --}}

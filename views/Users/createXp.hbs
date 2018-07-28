@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <a class="navbar-brand" href="/board">
-    <img src="{{theUser.imgPath}}" width="30" height="30" class="d-inline-block align-top" alt="">
+    <img src="{{theUser.imgPath}}" width="60" height="30" class="d-inline-block align-top" alt="">
     Comvors
   </a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -17,20 +17,36 @@
   </div>    
 </nav>
 
-<h2>Messages:</h2>
+<!--  experience: {
+      title: String,
+      imgName: String,
+      imgPath: String,
+      links: [String],
+      //later add if users collaborated
+      description: String,
 
-<div class="container-fluid">
-  {{#if msgs}}
-    {{#each msgs}}
-      <div class="row">
-        <a href="/messenger/{{this.id}}" class="">{{this.subject}}</a> <br>
-      {{#each msgs.users}}
-        {{this.username}}
-      {{/each}}
-      </div>
-    {{/each}}
+    } -->
+
+<form action="/myself/createXp" method="post" enctype="multipart/form-data">
+  <label for="">title:</label>
+  <input type="text" name="title" value="">
+<br>
+  <label for="">link:</label>
+  <input type="text" name="link" value="">
+<br>
+  <label for="">Description:</label>
+  <input type="text" name="description" value="">
+<br>
+  <label>Image:</label>
+  <input type="file" name="photo">
+<br>
+  {{#if message}}
+    <div class="error-message">{{ message }}</div>
   {{/if}}
-  </div>
-  <a href="/messenger/create" class="">Create Message</a>
-</div>
+  <button>Add Experience!</button>
+</form>
 
+<br>
+<form>
+  <input type="button" value="Go back!" onclick="history.back()">
+</form>

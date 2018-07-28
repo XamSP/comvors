@@ -2,6 +2,7 @@ const express      = require('express');
 const frndRouter   = express.Router();
 const User         = require("../models/user");
 const Message      = require('../models/message');
+const uploadCloud = require('../config/cloudinary.js');
 
 frndRouter.put('/:id/delete', (req, res, next) => {
   const userReqId = req.params.id;
@@ -132,9 +133,10 @@ frndRouter.get('/', (req, res, next) => {
 });
 
 frndRouter.get('/:id', (req, res, next) => {
+  const theUser = req.user
   User.findById(req.params.id).populate('friends friendReq')
   .then(user=> {
-    res.render('Friends/profile', {user});
+    res.render('Friends/profile', {theUser, user});
   })
   .catch(error => {
     next(error)

@@ -1,8 +1,106 @@
 body {
   padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font: 20px "Lucida Grande", Helvetica, Arial, sans-serif; 
+  background-color: #B6FFFD; 
+  color: blue;
+}
+
+html {
+  background-color: #B6FFFD; 
+}
+
+.navbar-light .navbar-brand {
+  color: blue;
+}
+
+.navbar-brand {
+  padding-bottom: 0;
+}
+
+.strokeme:not(.navbar )
+{
+    
+    text-shadow:
+    -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000;  
+}
+
+.navbar-light .navbar-nav .nav-link {
+  color: blue;
+}
+
+.blight {
+  background-color: rgba(255,255,255,0.6)
+
 }
 
 a {
   color: #00B7FF;
 }
+
+.msg {
+  background-image: url("/images/Req.png");
+}
+
+.top-buffer { margin-top:12px; }
+
+.chat
+{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.chat li
+{
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    border-bottom: 1px dotted #B3A9A9;
+}
+
+// .chat li.left .chat-body
+// {
+//     margin-left: 60px;
+// }
+
+// .chat li.right .chat-body
+// {
+//     margin-right: 60px;
+// }
+
+
+.chat li .chat-body p
+{
+    margin: 0;
+    color: #777777;
+}
+
+.panel .slidedown .glyphicon, .chat .glyphicon
+{
+    margin-right: 5px;
+}
+
+
+// ::-webkit-scrollbar-track
+// {
+//     -webkit-b  ox-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+//     background-color: #F5F5F5;
+// }
+
+::-webkit-scrollbar
+{
+    width: 12px;
+    background-color: #F5F5F5;
+}
+
+.card {
+  background-color: rgba(255,255,255,0.4)
+}
+
+// ::-webkit-scrollbar-thumb
+// {
+//     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+//     background-color: #555;
+// }

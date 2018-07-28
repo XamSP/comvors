@@ -5,6 +5,7 @@ const bcrypt = require("bcrypt");
 const bcryptSalt = 10;
 const passport = require("passport");
 const ensureLogin = require("connect-ensure-login");
+const uploadCloud = require('../config/cloudinary.js');
 
 /* GET home page */
 router.get('/', (req, res, next) => {
@@ -43,10 +44,15 @@ router.get("/signup", (req, res, next) => {
   res.render('signup');
 })
 
-router.post("/signup", (req, res, next) => {
+router.post("/signup", uploadCloud.single('photo'), (req, res, next) => {
   const username = req.body.username;
   const password = req.body.password;
   const specialty = req.body.specialty;
+  const imgPath = req.file.url;
+  const imgName = req.file.originalname;
+
+  console.log("hi file: "+req.file)
+
   if (username === "" || password === "") {
     res.render("signup", { message: "Indicate username and password" });
     return;
@@ -65,7 +71,9 @@ router.post("/signup", (req, res, next) => {
     const newUser = new User({
       username,
       password: hashPass,
-      specialty
+      specialty,
+      imgName,
+      imgPath
     });
 
     newUser.save((err) => {

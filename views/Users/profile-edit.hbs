@@ -1,25 +1,45 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="/board">
+    <img src="{{user.imgPath}}" width="30" height="30" class="d-inline-block align-top" alt="">
+    Comvors
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link" href="/scout/">Scout<span class="sr-only">(current)</span></a>
+      <a class="nav-item nav-link" href="/messenger/">Messages</a>
+      <a class="nav-item nav-link" href="/friends/">Friend-List</a>
+      <a class="nav-item nav-link" href="/myself/{{user.id}}/edit">Edit Your Profile!</a>
+      <a class="nav-item nav-link" href="/logout">Logout</a>
+    </div>
+  </div>    
+</nav>
+
  <h2>Edit:</h2>
 
-<form action="/scout/{{this.id}}/edit" method="post">
-  <label for="">Username:</label>
-  <input type="text" name="username" value="{{this.username}}">
-
+<form action="/myself/{{user.id}}/edit" method="post" enctype="multipart/form-data">
   <label for="">Create a new Password:</label>
   <input type="text" name="password" value="">
-
+<br>
   <label>Specialty: </label>
     <select name="specialty" value="{{user.specialty}}">
         <option value="Null">Null</option>
-        <option value="Composer">Composer</option>
-        <option value="Designer">Designer</option>
-        <option value="Donator">Donator</option>
-        <option value="Investor">Investor</option>
-        <option value="Marketing">Marketing</option>
-        <option value="Modeler">Modeler</option>
-        <option value="Programmer">Programmer</option>
-        <option value="Spriter">Spriter</option>
+        <option value="Designer">Designer</option>       
+        <option value="Programmer">Programmer</option>        
         <option value="Voice-Actor">Voice-Actor</option>
     </select>
-
+<br>
+  <label for="">Elaborate yourself!</label>
+  <input type="text" name="about" value="">
+<br>
+  <label>Profile Picture</label>
+  <input type="file" name="photo">
   <button type="submit">EDIT</button>
+</form>
+
+<br>
+<form>
+  <input type="button" value="Go back!" onclick="history.back()">
 </form>

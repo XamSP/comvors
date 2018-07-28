@@ -6,20 +6,23 @@ const bcrypt             = require("bcrypt");
 const bcryptSalt         = 10;
 const ensureLogin        = require("connect-ensure-login");
 const passport           = require("passport");
+const uploadCloud = require('../config/cloudinary.js');
 
 msgRouter.get('/', checkRoles('User'),(req, res, next) => {
+  const theUser = req.user
   User.findById(req.user._id).populate('inbox')
   .then(user=> {
-    let msgs = user.inbox 
+    const msgs = user.inbox 
     //console.log(msgs[0].subject);
-    res.render('MsgBoard/index', {msgs});
+    res.render('MsgBoard/index', {theUser, user, msgs});
   });  
 });
 
 msgRouter.get('/create', checkRoles('User'), (req, res,next) => {
+  const theUser = req.user
   User.findById(req.user._id).populate('friends')
   .then(user => {
-    res.render('MsgBoard/startmsg', {user})
+    res.render('MsgBoard/startmsg', {theUser, user})
   })
   .catch(err => {
     next();
@@ -88,7 +91,7 @@ msgRouter.post('/create', checkRoles('User'), (req, res,next) => {
 });
 
 msgRouter.get('/:msgid', checkRoles('User'), (req, res, next) => {
-
+  const theUser = req.user
   let msgId = req.params.msgid;
   if (!msgId) { 
     return res.status(404).render('not-found'); 
@@ -100,7 +103,7 @@ msgRouter.get('/:msgid', checkRoles('User'), (req, res, next) => {
       }
       console.log(theMsg)
       //const user = theMsg.populate('users')
-      res.render("MsgBoard/rendering", {theMsg})
+      res.render("MsgBoard/rendering", {theUser,theMsg})
     })
     .catch(next)
   });

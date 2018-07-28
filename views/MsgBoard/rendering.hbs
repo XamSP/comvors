@@ -1,8 +1,25 @@
-
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="/board">
+    <img src="{{theUser.imgPath}}" width="30" height="30" class="d-inline-block align-top" alt="">
+    Comvors
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link" href="/scout/">Scout<span class="sr-only">(current)</span></a>
+      <a class="nav-item nav-link" href="/messenger/">Messages</a>
+      <a class="nav-item nav-link" href="/friends/">Friend-List</a>
+      <a class="nav-item nav-link" href="/myself/{{theUser.id}}/edit">Edit Your Profile!</a>
+      <a class="nav-item nav-link" href="/logout">Logout</a>
+    </div>
+  </div>    
+</nav>
+{{!-- <script src="https://unpkg.com/axios/dist/axios.min.js"></script> --}}
 <!-- Add specific javascript file -->
-<script> </script>
-<div>
+{{!-- <script> </script> --}}
+{{!-- <div>
   <p>{{theMsg.subject}}</p>
   <p>
     <ul> Users:
@@ -16,12 +33,43 @@
       {{/each}}
     </ul>
   </p>
-  <form onsubmit="sendMsg('{{theMsg._id}}')">
-    <input id="LeText" type="text" name="childMsgContent" placeholder="Whatcha got to say?">
-    <input type="submit" value="Add!">
-</form>
-</div>
+</div> --}} 
 
 <!-- remember that onclick is an event function that must be found in javascript-->
 
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-primary">
+                <div class="panel-body">
+                    <ul class="chat">
+                      {{#each theMsg.texts}}
+                        <li class="left clearfix"><span class="chat-img pull-left">
+                            {{#if this.user.imgPath}}
+                            <img src="{{this.user.imgPath}}" alt="User Avatar" height="50 " width="50" class="img-circle" />
+                            {{else}}
+                            <img src="http://placehold.it/50/55C1E7/fff&text=U" height="50 " width="50"   alt="User Avatar" class="img-circle" />
+                            {{/if}}
+                        </span>
+                            <div class="chat-body clearfix">
+                                <div class="header">
+                                    <strong class="primary-font">{{this.user.username}}</strong> 
+                                </div>
+                                <p>
+                                    {{this.msg}}
+                                </p>
+                            </div>
+                        </li>
+                        {{/each}}
+                      </ul>
+                    </div>
+                    <form onsubmit="sendMsg('{{theMsg._id}}')">
+    <input id="LeText" type="text" name="childMsgContent" placeholder="Write now!">
+    <input type="submit" value="Add!">
+</form> 
+                </div>
+            </div>
+        </div>
+    </div>
 
+                        

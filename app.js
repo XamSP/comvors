@@ -36,7 +36,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(session({
-  secret: "our-passport-local-strategy-app",
+  secret: process.env.SECRET,
   resave: true,
   saveUninitialized: true
 }));
@@ -117,10 +117,10 @@ app.use('/messenger', messenger);
 const friends = require('./routes/friends');
 app.use('/friends', friends);
 
+const myself = require('./routes/myself');
+app.use('/myself', myself);
+
 // const admin = require('./routes/admin');
 // app.use('/admin', admin);
-
-// const stats = require('./routes/stats');
-// app.use('/stats', stats);
 
 module.exports = app;

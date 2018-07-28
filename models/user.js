@@ -16,6 +16,8 @@ const userSchema = new Schema({
     enum: ['Null', 'Programmer', 'Designer', 'Voice-Actor'],
     default : 'Null'
   },
+  imgName: String,
+  imgPath: String,
   coins: {
     type: Number,
     default: 10,
@@ -27,17 +29,29 @@ const userSchema = new Schema({
     }
   ],
   inbox:[
-  { 
-    type: Schema.Types.ObjectId, 
-    ref: "Message",
-  }
-],
+    { 
+      type: Schema.Types.ObjectId, 
+      ref: "Message",
+    }
+  ],
   friendReq:[
     { 
       type: Schema.Types.ObjectId, 
       ref: "User",
     }
-  ]
+  ],
+  about: String,
+  experiences: [
+    {
+      title: String,
+      imgName: String,
+      imgPath: String,
+      links: [String],
+      //later add if users collaborated
+      description: String,
+
+    }
+  ],
 }, {
   timestamps: { createdAt: "created_at", updatedAt: "updated_at" }
 });

@@ -5,19 +5,23 @@ const bcrypt             = require("bcrypt");
 const bcryptSalt         = 10;
 const ensureLogin        = require("connect-ensure-login");
 const passport           = require("passport");
+const uploadCloud        = require('../config/cloudinary.js');
 
 userRouter.get('/', (req, res, next) => {
-  res.render('Users/scout');
+  const user = req.user
+  
+  res.render('Users/scout', {user});
 });
 
 userRouter.get('/user-list', (req, res, next) => {
+  const user = req.user
   let userSpecialty = req.query.specialty;
   let msgAll = "All";
   if(userSpecialty){msgAll = userSpecialty}
   console.log(userSpecialty);
   if(!userSpecialty){
     User.find().then(users => {
-      res.render('Users/user-list' , {user: req.user, users, msgAll} );
+      res.render('Users/user-list' , {user, users, msgAll} );
       })
       .catch((error) => {
       console.log(error)
@@ -25,7 +29,7 @@ userRouter.get('/user-list', (req, res, next) => {
       })
   } else {
   User.find({'specialty': userSpecialty}).then(users => {
-  res.render('Users/user-list' , {user: req.user, users, msgAll} );
+  res.render('Users/user-list' , {user, users, msgAll} );
   })
   .catch((error) => {
   console.log(error)
@@ -35,7 +39,7 @@ userRouter.get('/user-list', (req, res, next) => {
 });
 
 userRouter.get('/:id', checkRoles('User'), (req, res, next) => {
-
+  const user = req.user
   let userId = req.params.id;
   if (!userId) { 
     return res.status(404).render('not-found'); 
@@ -47,7 +51,7 @@ userRouter.get('/:id', checkRoles('User'), (req, res, next) => {
           return res.status(404).render('not-found');
       }
       console.log('here')
-      res.render("Users/profile", theUser)
+      res.render("Users/profile", theUser, {user})
     })
     .catch(next)
 });
@@ -69,38 +73,12 @@ userRouter.post('/:id', checkRoles('User'), (req, res, next) =>{
   })
 });
 
-userRouter.get('/:id/edit', checkRoles('User'),(req, res, next) => {
-  let userId = req.params.id;
-  User.findById(userId)
-  .then((user) => {
-    res.render("Users/profile-edit", user)
-  })
-  .catch((error) => {
-    console.log(error)
-  })
-});
-
-userRouter.post('/:id/edit', (req, res, next) => {
-  const userId = req.params.id;
-  const { username, password, specialty } = req.body;
-  const salt = bcrypt.genSaltSync(bcryptSalt);
-  const hashPass = bcrypt.hashSync(password, salt);
-
-  
-  User.update({_id: userId}, { $set: { username, password:hashPass, specialty }},{new: true})
-  .then((user) => {
-    res.redirect('/board')
-  })
-  .catch((error) => {
-    console.log(error)
-  })
-});
-
 userRouter.get('/user-list/:id', (req, res, next) => {
+  const theUser = req.user 
   let userId = req.params.id;
   User.findById(userId)
   .then((user) => {
-    res.render("Users/profile", user)
+    res.render("Users/profile", {theUser, user})
   })
   .catch((error) => {
     console.log(error)

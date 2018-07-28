@@ -1,7 +1,69 @@
+<nav class="navbar navbar-expand-lg navbar-light blight">
+  <a class="navbar-brand" href="/board">
+    <img src="{{user.imgPath}}" width="30" height="30" class="d-inline-block align-top" alt="">
+    Comvors
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link" href="/scout/">Scout<span class="sr-only">(current)</span></a>
+      <a class="nav-item nav-link" href="/messenger/">Messages</a>
+      <a class="nav-item nav-link" href="/friends/">Friend-List</a>
+      <a class="nav-item nav-link" href="/myself/{{user.id}}/edit">Edit Your Profile!</a>
+      <a class="nav-item nav-link" href="/logout">Logout</a>
+    </div>
+  </div>    
+</nav>
+
 <h2>Friends:</h2>
 
-<div class="">
+<div class="container-fluid">
+  <div class="row">
+  <div class="col-lg-12">
+    {{#each myFriends}}
+    <div class="container house card">
+      <div class="row">
+        <div class="col-lg-2">
+          {{#if this.imgPath}}
+          <img src="{{this.imgPath}}" width="90" height="90">
+          {{else}}
+          <img src="/images/JustC.png" width="90" height="90">
+          {{/if}}
+        </div>
+      
+        <div class="col-lg-10"> 
+        <div class="container">       
+        <div class="row">
+          <div class="col-lg-6">Name: {{this.username}}</div>
+          <div class="col-lg-6">Specialty: {{this.specialty}}</div>
+        </div>
+        <div class="row top-buffer">
+          <div class="col-lg-6">Coins: {{this.coins}}</div>
+          <div class="col-lg-6">Role: {{this.role}}</div>
+        </div>
+        <div class="row top-buffer">
+          <div class="col-lg-9 text-center ">Check <a href="/friends/{{this.id}}"> {{this.username}}</a></div>
+          
+        </div>
+         
+        </div>
+        </div>
+                       
+      </div>
+    </div>
+    {{else}}
+    <p>No results!</p>
+    {{/each}}
+  </div>
+</div>
+</div>
+
+
+{{!-- <div class="">
   {{#each myFriends}}
+
       <a role="button" href="/friends/{{this.id}}" class="a1 btn btn-primary btn-lg">{{this.username}}</a> <br>
       <span> Coins:{{this.coins}} Specialty:{{this.specialty}}</span> <br>
       <button onclick="deleteUser('{{this.id}}', '{{../user._id}}')">Delete</button><br>
@@ -14,4 +76,8 @@
       </li>
     {{/each}}
   {{/if }}
-</div>
+</div> --}}
+
+<form>
+  <input type="button" value="Go back!" onclick="history.back()">
+</form>
